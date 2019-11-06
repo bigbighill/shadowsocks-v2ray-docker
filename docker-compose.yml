@@ -1,0 +1,12 @@
+version: '3.5'
+services:
+  v2ray:
+    image: v2ray/official:latest
+    container_name: v2ray
+    restart: always
+    volumes:
+      - ./config:/etc/v2ray
+      - ./log:/var/log/v2ray
+      - /etc/localtime:/etc/localtime
+    ports:  
+      - 127.0.0.1:8888:8888
