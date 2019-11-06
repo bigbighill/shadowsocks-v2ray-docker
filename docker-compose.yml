@@ -10,3 +10,13 @@ services:
       - /etc/localtime:/etc/localtime
     ports:  
       - 127.0.0.1:8888:8888
+
+##############################################################
+    volumes:
+          - ./config:/etc/v2ray  config.json存在宿主机 config 目录
+          - ./log:/var/log/v2ray  v2ray日志保存在宿主机 log 目录
+          - /etc/localtime:/etc/localtime  容器和宿主机时间同步
+        ports:  
+          - 127.0.0.1:8888:8888  宿主机端口：容器端口（v2ray config.json文件中定义的访问端口）
+      
+##############################################################
