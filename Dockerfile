@@ -23,5 +23,6 @@ RUN set -ex && \
     chmod +x /usr/bin/v2ray/v2ray
 
 ENV PATH /usr/bin/v2ray:$PATH
+ENV TZ=Asia/Shanghai
 
 CMD ["v2ray", "-config=/etc/v2ray/config.json"]
