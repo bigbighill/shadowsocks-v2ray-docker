@@ -7,12 +7,12 @@ RUN apk update && apk add --no-cache git bash wget curl
 
 WORKDIR /
 
-RUN mkdir /go/src/v2ray.com/core
+COPY user-package.sh /user-package.sh
 
-COPY user-package.sh /go/src/v2ray.com/core/user-package.sh
-
-RUN git clone --depth=1 https://github.com/v2ray/v2ray-core.git /go/src/v2ray.com/core && \
-    bash ./user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz && \
+RUN mkdir -p /go/src/v2ray.com/core && cd /go/src/v2ray.com/core && \
+    git clone --depth=1 https://github.com/v2ray/v2ray-core.git /go/src/v2ray.com/core && \
+    mv /user-package.sh /go/src/v2ray.com/core/release/ && \
+    bash ./release/user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz && \
     rm /go/src/vwray.com/xore -rf
     
     
