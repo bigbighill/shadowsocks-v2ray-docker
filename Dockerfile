@@ -9,9 +9,12 @@ WORKDIR /go/src/v2ray.com/core
 
 COPY user-package.sh /user-package.sh
 
-RUN cd /go/src/v2ray.com/core && git clone --depth=1 https://github.com/v2ray/v2ray-core.git ./ && \
+RUN cd /go/src/v2ray.com/core && git clone --depth=1 https://github.com/v2ray/v2ray-core.git /go/src/v2ray.com/core && \
+   
     mv -f /user-package.sh ./release/user-package.sh && \
+
     bash ./release/user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz && \
+
     rm /go/src/v2ray.com/core -rf
     
     
@@ -26,9 +29,13 @@ LABEL maintainer "V2Fly Community <admin@v2fly.org>"
 COPY --from=builder /tmp/v2ray.tgz /tmp
 
 RUN apk update && apk add ca-certificates tzdata && \
+    
     mkdir -p /usr/bin/v2ray && \
+
     tar xvfz /tmp/v2ray.tar.gz -C /usr/bin/v2ray &&\
+    
     rm /tmp/v2ray.tar.gz && \
+
     mkdir /var/log/v2ray
     
 ENV PATH /usr/bin/v2ray:$PATH
