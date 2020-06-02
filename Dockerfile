@@ -10,7 +10,7 @@ WORKDIR /go/src/v2ray.com/core
 COPY user-package.sh /go/src/v2ray.com/core/user-package.sh
 
 RUN git clone --depth=1 https://github.com/v2ray/v2ray-core.git . && \
-    mv /user-package.sh ./release/user-package.sh && \
+    mv -f /user-package.sh ./release/user-package.sh && \
     bash ./release/user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz && \
     rm /go/src/v2ray.com/core -rf
     
