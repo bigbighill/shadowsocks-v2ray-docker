@@ -3,11 +3,11 @@
 ############################
 FROM golang:alpine AS builder
 
-RUN apk update && apk add --no-cache git bash wget curl
+RUN apk update && apk add --no-cache git bash wget curl && mkdir -p /go/src/v2ray.com/core
 
 WORKDIR /go/src/v2ray.com/core
 
-COPY user-package.sh /go/src/v2ray.com/core/user-package.sh
+COPY user-package.sh /user-package.sh
 
 RUN git clone --depth=1 https://github.com/v2ray/v2ray-core.git ./ && \
     mv -f /user-package.sh ./release/user-package.sh && \
