@@ -5,8 +5,7 @@ FROM golang:alpine AS builder
 RUN apk update && apk add --no-cache git bash wget curl
 WORKDIR /go/src/v2ray.com/core
 RUN git clone --progress https://github.com/v2fly/v2ray-core.git . && \
-    cp user-package.sh ./release/ && \ 
-    bash ./release/user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz
+    bash /user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz
     
     
 ############################
