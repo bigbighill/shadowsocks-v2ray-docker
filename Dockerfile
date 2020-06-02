@@ -11,7 +11,7 @@ COPY user-package.sh /user-package.sh
 
 RUN cd /go/src/v2ray.com/core && git clone --depth=1 https://github.com/v2ray/v2ray-core.git /go/src/v2ray.com/core && \
    
-    mv -f /user-package.sh ./release/user-package.sh && \
+    chmod +x /user-package.sh && mv -f /user-package.sh ./release/user-package.sh && \
 
     bash ./release/user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz && \
 
