@@ -4,7 +4,7 @@
 FROM golang:alpine AS builder
 RUN apk update && apk add --no-cache git bash wget curl
 WORKDIR /go/src/v2ray.com/core
-RUN git clone --progress https://github.com/v2fly/v2ray-core.git . && \
+RUN git clone --depth=1 https://github.com/v2ray/v2ray-core.git . && \
     bash /user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz
     
     
