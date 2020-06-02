@@ -11,7 +11,8 @@ RUN git clone --depth=1 https://github.com/v2ray/v2ray-core.git . && \
 ############################
 # STEP 2 build a small image
 ############################
-FROM alpine
+
+FROM alpine:latest
 
 LABEL maintainer "V2Fly Community <admin@v2fly.org>"
 COPY --from=builder /tmp/v2ray.tgz /tmp
