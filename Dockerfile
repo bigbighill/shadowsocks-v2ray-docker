@@ -19,7 +19,7 @@ FROM alpine:latest
 
 COPY --from=builder /tmp/v2ray.tar.gz /tmp
 
-RUN apk update && apk add ca-certificates tzdata && \
+RUN apk update && apk add --no-cache ca-certificates tzdata && \
     
     mkdir -p /usr/bin/v2ray && \
 
