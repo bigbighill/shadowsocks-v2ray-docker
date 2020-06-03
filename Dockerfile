@@ -6,7 +6,7 @@ WORKDIR /go/src/v2ray.com/core
 
 COPY user-package.sh /user-package.sh
 
-RUN cd /go/src/v2ray.com/core && git clone  https://github.com/v2ray/v2ray-core.git /go/src/v2ray.com/core && \
+RUN cd /go/src/v2ray.com/core && git clone  https://github.com/v2ray/v2ray-core.git ./ && \
    
     chmod +x /user-package.sh && mv -f /user-package.sh ./release/user-package.sh && \
 
