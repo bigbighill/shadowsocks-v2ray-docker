@@ -1,6 +1,3 @@
-############################
-# STEP 1 build executable binary
-############################
 FROM golang:alpine AS builder
 
 RUN apk update && apk add --no-cache git bash wget curl && mkdir -p /go/src/v2ray.com/core
@@ -17,14 +14,8 @@ RUN cd /go/src/v2ray.com/core && git clone  https://github.com/v2ray/v2ray-core.
 
     rm /go/src/v2ray.com/core -rf
     
-    
-############################
-# STEP 2 build a small image
-############################
 
 FROM alpine:latest
-
-LABEL maintainer "V2Fly Community <admin@v2fly.org>"
 
 COPY --from=builder /tmp/v2ray.tar.gz /tmp
 
