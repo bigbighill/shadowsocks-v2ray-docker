@@ -1,4 +1,4 @@
-ARG VERSION ="v4.24.2"
+ARG VERSION ='v4.24.2'
 
 FROM golang:alpine AS builder
 
