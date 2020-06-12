@@ -1,3 +1,5 @@
+ARG VERSION ="v4.24.2"
+
 FROM golang:alpine AS builder
 
 RUN apk update && apk add --no-cache git bash wget curl && mkdir -p /go/src/v2ray.com/core
@@ -6,7 +8,7 @@ WORKDIR /go/src/v2ray.com/core
 
 COPY user-package.sh /user-package.sh
 
-RUN cd /go/src/v2ray.com/core && git clone  https://github.com/v2fly/v2ray-core.git ./ && \
+RUN cd /go/src/v2ray.com/core && git clone --branch=$VERSION --depth=1 https://github.com/v2fly/v2ray-core.git ./ && \
    
     chmod +x /user-package.sh && mv -f /user-package.sh ./release/user-package.sh && \
 
