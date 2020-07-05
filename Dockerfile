@@ -1,6 +1,6 @@
 FROM golang:alpine AS builder
 
-ARG VERSION='v4.25.1'
+ARG VERSION='v4.26.0'
 
 RUN apk update && apk add --no-cache git bash wget curl && mkdir -p /go/src/v2ray.com/core
 
