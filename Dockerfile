@@ -27,7 +27,7 @@ RUN apk update && apk add --no-cache ca-certificates tzdata libcap && \
 
     tar xvfz /tmp/v2ray.tar.gz -C /usr/bin/v2ray &&\
     
-    chmod +x /usr/bin/v2ray/v2ray && chmod +x /usr/bin/v2ray/v2ctl &&\
+    chmod 755 /usr/bin/v2ray/v2ray && chmod 755 /usr/bin/v2ray/v2ctl &&\
     
     setcap 'cap_net_bind_service=+ep' /usr/bin/v2ray/v2ray &&\
     
@@ -40,4 +40,4 @@ ENV PATH /usr/bin/v2ray:$PATH
 ENV TZ=Asia/Shanghai
 
 
-CMD ["v2ray", "-config=/etc/v2ray/config.json"]
+CMD ["/usr/bin/v2ray/v2ray", "-config=/etc/v2ray/config.json"]
