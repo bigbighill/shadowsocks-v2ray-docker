@@ -21,7 +21,7 @@ FROM alpine:latest
 
 COPY --from=builder /tmp/v2ray.tar.gz /tmp
 
-RUN apk update && apk add --no-cache ca-certificates tzdata setcap && \
+RUN apk update && apk add --no-cache ca-certificates tzdata libcap && \
     
     mkdir -p /usr/bin/v2ray && \
 
