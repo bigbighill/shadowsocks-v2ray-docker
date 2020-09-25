@@ -23,7 +23,7 @@ COPY --from=builder /tmp/v2ray.tar.gz /tmp
 
 RUN apk update && apk add --no-cache ca-certificates tzdata libcap && \
     
-    mkdir -p /usr/bin/v2ray && chmod 755 /usr/bin/v2ray -R &&\
+    mkdir -p /usr/bin/v2ray && chmod 755 /usr/bin/v2ray/ -R &&\
 
     tar xvfz /tmp/v2ray.tar.gz -C /usr/bin/v2ray &&\
     
@@ -35,8 +35,6 @@ RUN apk update && apk add --no-cache ca-certificates tzdata libcap && \
 
     mkdir /var/log/v2ray && chmod 666 /var/log/v2ray -R
     
-
-ENV PATH /usr/bin/v2ray:$PATH
 
 ENV TZ=Asia/Shanghai
 
