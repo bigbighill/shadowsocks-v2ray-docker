@@ -21,9 +21,9 @@ FROM alpine:latest
 
 COPY --from=builder /tmp/v2ray.tar.gz /tmp
 
-RUN set -ex && apk update && apk add --no-cache ca-certificates tzdata libcap && \    
+RUN set -ex && apk update && apk add --no-cache ca-certificates tzdata libcap bash && \    
     mkdir -p /usr/local/bin/v2ray &&\
-    chmod +x /usr/local/bin/v2ray -R &&\
+    bash -c 'chmod 755 /usr/local/bin/v2ray -R' &&\
     tar xvfz /tmp/v2ray.tar.gz -C /usr/local/bin/v2ray &&\    
     chmod +x /usr/local/bin/v2ray/v2ray &&\
     chmod +x /usr/local/bin/v2ray/v2ctl  &&\
