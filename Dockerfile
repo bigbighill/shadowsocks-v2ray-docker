@@ -23,13 +23,13 @@ COPY --from=builder /tmp/v2ray.tar.gz /tmp
 
 RUN set -ex && apk update && apk add --no-cache ca-certificates tzdata libcap && \
     
-    mkdir -p /usr/bin/v2ray && chmod 755 /usr/bin/v2ray/ -R &&\
+    mkdir -p /usr/local/bin/v2ray && chmod 755 /usr/local/bin/v2ray/ -R &&\
 
-    tar xvfz /tmp/v2ray.tar.gz -C /usr/bin/v2ray &&\
+    tar xvfz /tmp/v2ray.tar.gz -C /usr/local/bin/v2ray &&\
     
-    chmod 755 /usr/bin/v2ray/v2ray && chmod 755 /usr/bin/v2ray/v2ctl  &&\
+    chmod 755 /usr/local/bin/v2ray/v2ray && chmod 755 /usr/local/bin/v2ray/v2ctl  &&\
     
-    setcap 'cap_net_bind_service=+ep' /usr/bin/v2ray/v2ray && setcap 'cap_net_bind_service=+ep' /usr/bin/v2ray/v2ctl &&\
+    setcap 'cap_net_bind_service=+ep' /usr/local/bin/v2ray/v2ray && setcap 'cap_net_bind_service=+ep' /usr/local/bin/v2ray/v2ctl &&\
     
     rm /tmp/v2ray.tar.gz && \
 
@@ -38,6 +38,6 @@ RUN set -ex && apk update && apk add --no-cache ca-certificates tzdata libcap &&
 
 ENV TZ=Asia/Shanghai
 
-WORKDIR /usr/bin/v2ray
+WORKDIR /usr/local/bin/v2ray
 
-ENTRYPOINT ["/usr/bin/v2ray/v2ray", "-config=/etc/v2ray/config.json"]
+ENTRYPOINT ["v2ray", "-config=/etc/v2ray/config.json"]
