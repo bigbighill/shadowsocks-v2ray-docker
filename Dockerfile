@@ -27,7 +27,7 @@ RUN apk update && apk add --no-cache ca-certificates tzdata libcap && \
 
     tar xvfz /tmp/v2ray.tar.gz -C /usr/bin/v2ray &&\
     
-    chmod 755 /usr/bin/v2ray/v2ray && chmod 755 /usr/bin/v2ray/v2ctl &&\
+    chmod 755 /usr/bin/v2ray/v2ray -R && chmod 755 /usr/bin/v2ray/v2ctl -R &&\
     
     setcap 'cap_net_bind_service=+ep' /usr/bin/v2ray/v2ray && setcap 'cap_net_bind_service=+ep' /usr/bin/v2ray/v2ctl &&\
     
