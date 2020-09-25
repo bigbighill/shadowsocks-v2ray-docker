@@ -26,7 +26,7 @@ COPY --from=builder /usr/bin/v2ray /usr/bin/v2ray
 RUN set -ex && apk update && apk add --no-cache ca-certificates tzdata libcap  && \    
     setcap 'cap_net_bind_service=+ep' /usr/bin/v2ray/v2ray &&\
     setcap 'cap_net_bind_service=+ep' /usr/bin/v2ray/v2ctl &&\
-    mkdir /var/log/v2ray
+    mkdir /var/log/v2ray && chmod 666 -R /var/log/v2ray 
     
 
 ENV TZ=Asia/Shanghai
