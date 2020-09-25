@@ -23,10 +23,10 @@ COPY --from=builder /tmp/v2ray.tar.gz /tmp
 
 RUN set -ex && apk update && apk add --no-cache ca-certificates tzdata libcap && \    
     mkdir -p /usr/local/bin/v2ray &&\
-    chmod 755 /usr/local/bin/v2ray -R &&\
+    chmod +x /usr/local/bin/v2ray -R &&\
     tar xvfz /tmp/v2ray.tar.gz -C /usr/local/bin/v2ray &&\    
-    chmod 755 /usr/local/bin/v2ray/v2ray &&\
-    chmod 755 /usr/local/bin/v2ray/v2ctl  &&\
+    chmod +x /usr/local/bin/v2ray/v2ray &&\
+    chmod +x /usr/local/bin/v2ray/v2ctl  &&\
     setcap 'cap_net_bind_service=+ep' /usr/local/bin/v2ray/v2ray &&\
     setcap 'cap_net_bind_service=+ep' /usr/local/bin/v2ray/v2ctl &&\
     rm /tmp/v2ray.tar.gz && \
