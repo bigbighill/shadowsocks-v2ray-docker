@@ -33,7 +33,7 @@ RUN apk update && apk add --no-cache ca-certificates tzdata libcap && \
     
     rm /tmp/v2ray.tar.gz && \
 
-    mkdir /var/log/v2ray
+    mkdir /var/log/v2ray && chmod 666 /var/log/v2ray -R
     
 ENV PATH /usr/bin/v2ray:$PATH
 
