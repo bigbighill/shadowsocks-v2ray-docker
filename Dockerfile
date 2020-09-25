@@ -14,26 +14,23 @@ RUN set -ex && cd /go/src/v2ray.com/core && git clone --branch=$VERSION https://
 
     bash ./release/user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz && \
 
-    rm /go/src/v2ray.com/core -rf
+    tar xvfz /tmp/v2ray.tar.gz -C /usr/bin/v2ray &&\
+
+    rm /go/src/v2ray.com/core -rf && rm /tmp/v2ray.tar.gz -rf
     
 
 FROM alpine:latest
 
-COPY --from=builder /tmp/v2ray.tar.gz /tmp
+COPY --from=builder /usr/bin/v2ray /usr/bin/v2ray
 
 RUN set -ex && apk update && apk add --no-cache ca-certificates tzdata libcap  && \    
-    mkdir -p -m 755 /usr/local/bin/v2ray &&\
-    tar xvfz /tmp/v2ray.tar.gz -C /usr/local/bin/v2ray &&\    
-    chmod +x /usr/local/bin/v2ray/v2ray &&\
-    chmod +x /usr/local/bin/v2ray/v2ctl  &&\
-    setcap 'cap_net_bind_service=+ep' /usr/local/bin/v2ray/v2ray &&\
-    setcap 'cap_net_bind_service=+ep' /usr/local/bin/v2ray/v2ctl &&\
-    rm /tmp/v2ray.tar.gz && \
-    mkdir /var/log/v2ray && chmod 666 /var/log/v2ray -R
+    setcap 'cap_net_bind_service=+ep' /usr/bin/v2ray/v2ray &&\
+    setcap 'cap_net_bind_service=+ep' /usr/bin/v2ray/v2ctl &&\
+    mkdir /var/log/v2ray
     
 
 ENV TZ=Asia/Shanghai
 
-WORKDIR /usr/local/bin/v2ray
+WORKDIR /usr/bin/v2ray
 
-CMD ["/usr/local/bin/v2ray/v2ray", "-config=/etc/v2ray/config.json"]
+CMD ["/usr/bin/v2ray/v2ray", "-config=/etc/v2ray/config.json"]
