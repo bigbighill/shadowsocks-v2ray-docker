@@ -14,7 +14,7 @@ RUN set -ex && cd /go/src/v2ray.com/core && git clone --branch=$VERSION https://
 
     bash ./release/user-package.sh nosource noconf  abpathtgz=/tmp/v2ray.tar.gz && \
 
-    tar xvfz /tmp/v2ray.tar.gz -C /usr/bin/v2ray &&\
+    mkdir -p /usr/bin/v2ray && tar xvfz /tmp/v2ray.tar.gz -C /usr/bin/v2ray &&\
 
     rm /go/src/v2ray.com/core -rf && rm /tmp/v2ray.tar.gz -rf
     
