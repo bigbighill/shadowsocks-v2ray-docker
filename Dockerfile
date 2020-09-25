@@ -35,6 +35,9 @@ RUN apk update && apk add --no-cache ca-certificates tzdata libcap && \
 
     mkdir /var/log/v2ray && chmod 666 /var/log/v2ray -R
     
+VOLUME /var/log/v2ray
+VOLUME /etc/v2ray
+
 ENV PATH /usr/bin/v2ray:$PATH
 
 ENV TZ=Asia/Shanghai
