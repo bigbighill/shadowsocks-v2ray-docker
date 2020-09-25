@@ -2,13 +2,13 @@ FROM golang:alpine AS builder
 
 ARG VERSION='v4.28.2'
 
-RUN apk update && apk add --no-cache git bash wget curl && mkdir -p /go/src/v2ray.com/core
+RUN set -ex && apk update && apk add --no-cache git bash wget curl && mkdir -p /go/src/v2ray.com/core
 
 WORKDIR /go/src/v2ray.com/core
 
 COPY user-package.sh /user-package.sh
 
-RUN cd /go/src/v2ray.com/core && git clone --branch=$VERSION https://github.com/v2fly/v2ray-core.git ./ && \
+RUN set -ex && cd /go/src/v2ray.com/core && git clone --branch=$VERSION https://github.com/v2fly/v2ray-core.git ./ && \
    
     chmod +x /user-package.sh && mv -f /user-package.sh ./release/user-package.sh && \
 
@@ -21,7 +21,7 @@ FROM alpine:latest
 
 COPY --from=builder /tmp/v2ray.tar.gz /tmp
 
-RUN apk update && apk add --no-cache ca-certificates tzdata libcap && \
+RUN set -ex && apk update && apk add --no-cache ca-certificates tzdata libcap && \
     
     mkdir -p /usr/bin/v2ray && chmod 755 /usr/bin/v2ray/ -R &&\
 
@@ -37,5 +37,7 @@ RUN apk update && apk add --no-cache ca-certificates tzdata libcap && \
     
 
 ENV TZ=Asia/Shanghai
+
+WORKDIR /usr/bin/v2ray
 
 CMD ["/usr/bin/v2ray/v2ray", "-config=/etc/v2ray/config.json"]
