@@ -40,4 +40,4 @@ ENV TZ=Asia/Shanghai
 
 WORKDIR /usr/bin/v2ray
 
-CMD ["/usr/bin/v2ray/v2ray", "-config=/etc/v2ray/config.json"]
+ENTRYPOINT ["/usr/bin/v2ray/v2ray", "-config=/etc/v2ray/config.json"]
